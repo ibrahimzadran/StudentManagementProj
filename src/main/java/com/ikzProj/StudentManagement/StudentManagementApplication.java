@@ -3,8 +3,10 @@ package com.ikzProj.StudentManagement;
 import com.ikzProj.StudentManagement.entity.Gender;
 import com.ikzProj.StudentManagement.entity.Student;
 import com.ikzProj.StudentManagement.entity.Teacher;
+import com.ikzProj.StudentManagement.entity.User;
 import com.ikzProj.StudentManagement.repository.StudentRepository;
 import com.ikzProj.StudentManagement.repository.TeacherRepository;
+import com.ikzProj.StudentManagement.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class StudentManagementApplication implements CommandLineRunner {
 	private StudentRepository studentRepository;
 	@Autowired
 	private TeacherRepository teacherRepository;
+	@Autowired
+	private UserRepository userRepository;
 	private static final Logger logger = LoggerFactory.getLogger(StudentManagementApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(StudentManagementApplication.class, args);
@@ -49,6 +53,7 @@ public class StudentManagementApplication implements CommandLineRunner {
 		studentRepository.findAll().forEach(student -> logger.info(student.getFirstName()+" "+ student.getLastName()));
 
 		teacherRepository.findAll().forEach(teacher -> logger.info(teacher.getFirstName()));
+
 
 	}
 }
