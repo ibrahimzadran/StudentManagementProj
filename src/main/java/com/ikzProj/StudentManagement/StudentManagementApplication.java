@@ -54,8 +54,8 @@ public class StudentManagementApplication implements CommandLineRunner {
 
 		teacherRepository.findAll().forEach(teacher -> logger.info(teacher.getFirstName()));
 
-		userRepository.save(new User("admin","$2y$12$0GwlCo1ycifewq6dVGsUGebS3xkxkDmiAaeFwlEp8AWpwUM0bP8uS","ADMIN"));
-		userRepository.save(new User("user","$2y$12$VSQlOn25mziXb11Talpum.kY7ABIJwLlZCvWIuW7/wZUTpld9RdN6","USER"));
+		userRepository.save(new User("admin","$2y$10$vWRjQTW0TI9RIOPR2kp8EuT8JAp2CKaAZq2oiOuS9f4PrE6orOvgO","ADMIN"));
+		userRepository.save(new User("user","$2y$10$vG9HygzUW.vakuwzmHjM8Otr3TTlssfFhkFnHn67RTzugMy8kv6U6","USER"));
 
 
 

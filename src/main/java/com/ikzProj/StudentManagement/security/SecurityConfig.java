@@ -19,29 +19,36 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
-        return httpSecurity
-                .cors(Customizer.withDefaults())
-                .csrf(csrf->csrf.disable())
-                .authorizeRequests(authorizeRequest->authorizeRequest.anyRequest().permitAll())
-                .build();
-//                .authorizeHttpRequests((auth)->auth.requestMatchers(HttpMethod.POST,"/api/v1/student").hasAnyRole("ADMIN","USER")
-//                        .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-//                        .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
-//                        .anyRequest().authenticated()
-//                ).sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .build();
+
+               return    httpSecurity
+                       .cors(Customizer.withDefaults())
+                       .csrf(csrf -> csrf.disable())
+                       .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().permitAll())
+                       .build();
+
+
+//             .csrf(Customizer.withDefaults())
+////             .cors((c) -> Customizer.withDefaults())
+//                .authorizeHttpRequests((authorizeRequests) ->
+//                        authorizeRequests
+//                                .requestMatchers(HttpMethod.GET, "/api/v1/student/*").hasRole("USER")
+//                                .requestMatchers(HttpMethod.POST, "/api/v1/student/*").hasRole("ADMIN")
+//                                .anyRequest().authenticated()
+//                )
+//        .httpBasic(Customizer.withDefaults())
+//        .build();
     }
 
     @Bean
     public UserDetailsService userDetailsService(){
         UserDetails admin = User.builder()
                 .username("admin")
-                .password("adminPass")
+                .password(bCryptPasswordEncoder().encode("adminPass"))
                 .roles("ADMIN")
                 .build();
         UserDetails user = User.builder()
                 .username("user")
-                .password("userPass")
+                .password(bCryptPasswordEncoder().encode("userPass"))
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(admin,user);
